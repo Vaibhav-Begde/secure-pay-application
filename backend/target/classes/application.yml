@@ -1,0 +1,55 @@
+# =============================================================
+# SecurePay — DEFAULT / DEVELOPMENT profile
+# WARNING: Contains hardcoded dev credentials.
+# NEVER use this profile in production.
+# For production, activate application-prod.yml:
+#   --spring.profiles.active=prod
+# =============================================================
+
+server:
+  port: 8081
+
+spring:
+  application:
+    name: securepay-backend
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/securepay_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:Vaibhav2034}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.MySQLDialect
+  mail:
+    host: ${SPRING_MAIL_HOST:smtp.gmail.com}
+    port: ${SPRING_MAIL_PORT:587}
+    username: ${SPRING_MAIL_USERNAME:securepay.contact@gmail.com}
+    password: ${SPRING_MAIL_PASSWORD:ebfkyrwzjircurne}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+app:
+  jwt:
+    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    expiration-ms: 86400000
+  mail:
+    enabled: ${APP_MAIL_ENABLED:true}
+
+logging:
+  level:
+    root: INFO
+    com.securepay: INFO
+    org.hibernate.SQL: WARN

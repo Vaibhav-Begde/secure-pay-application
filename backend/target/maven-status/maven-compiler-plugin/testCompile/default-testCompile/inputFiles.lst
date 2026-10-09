@@ -1,0 +1,12 @@
+D:\SecurePay\backend\src\test\java\com\securepay\controller\AuthControllerTest.java
+D:\SecurePay\backend\src\test\java\com\securepay\controller\PrivilegeEscalationTest.java
+D:\SecurePay\backend\src\test\java\com\securepay\controller\SecurityAccessTest.java
+D:\SecurePay\backend\src\test\java\com\securepay\service\AuthServiceTest.java
+D:\SecurePay\backend\src\test\java\com\securepay\service\EmailServiceImplTest.java
+D:\SecurePay\backend\src\test\java\com\securepay\service\EndToEndScenarioTest.java
+D:\SecurePay\backend\src\test\java\com\securepay\service\FaceVerificationServiceTest.java
+D:\SecurePay\backend\src\test\java\com\securepay\service\FraudDetectionServiceTest.java
+D:\SecurePay\backend\src\test\java\com\securepay\service\FraudRuleBoundaryTest.java
+D:\SecurePay\backend\src\test\java\com\securepay\service\MoneyIntegrityTest.java
+D:\SecurePay\backend\src\test\java\com\securepay\service\OtpServiceTest.java
+D:\SecurePay\backend\src\test\java\com\securepay\service\TransactionServiceTest.java

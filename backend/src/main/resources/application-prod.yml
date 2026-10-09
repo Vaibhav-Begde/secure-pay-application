@@ -1,0 +1,59 @@
+# =============================================================
+# SecurePay — PRODUCTION profile
+# Activate with: --spring.profiles.active=prod
+# All sensitive values MUST be provided via environment variables.
+# No hardcoded secrets. Application will fail to start if missing.
+# =============================================================
+
+spring:
+  datasource:
+    # Required env vars — no defaults in production
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate   # Never auto-update schema in production
+    show-sql: false         # C1/M1: No SQL in production logs
+    properties:
+      hibernate:
+        format_sql: false
+  mail:
+    host: ${SPRING_MAIL_HOST:smtp.gmail.com}
+    port: ${SPRING_MAIL_PORT:587}
+    username: ${SPRING_MAIL_USERNAME:securepay.contact@gmail.com}
+    password: ${SPRING_MAIL_PASSWORD:ebfkyrwzjircurne}    # C2: No hardcoded email credentials
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+app:
+  jwt:
+    secret: ${APP_JWT_SECRET}            # C3: No hardcoded JWT secret
+    expiration-ms: ${APP_JWT_EXPIRATION_MS:86400000}
+  mail:
+    enabled: ${APP_MAIL_ENABLED:true}
+
+logging:
+  level:
+    root: WARN
+    com.securepay: INFO
+    org.hibernate.SQL: OFF               # M1: No SQL logging in production
+
+# =============================================================
+# Required environment variables for production:
+#   SPRING_DATASOURCE_URL
+#   SPRING_DATASOURCE_USERNAME
+#   SPRING_DATASOURCE_PASSWORD
+#   SPRING_MAIL_HOST
+#   SPRING_MAIL_USERNAME
+#   SPRING_MAIL_PASSWORD
+#   APP_JWT_SECRET  (min 256-bit base64-encoded key)
+# =============================================================

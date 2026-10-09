@@ -1,0 +1,17 @@
+-------------------------------------------------------------------------------
+Test set: com.securepay.service.FraudRuleBoundaryTest$HighAmountRule
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.027 s <<< FAILURE! -- in com.securepay.service.FraudRuleBoundaryTest$HighAmountRule
+com.securepay.service.FraudRuleBoundaryTest$HighAmountRule.doesNotFire_below10k -- Time elapsed: 0.006 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: HIGH_AMOUNT should not trigger below 10,000 ==> expected: <false> but was: <true>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertFalse.failNotFalse(AssertFalse.java:63)
+	at org.junit.jupiter.api.AssertFalse.assertFalse(AssertFalse.java:36)
+	at org.junit.jupiter.api.Assertions.assertFalse(Assertions.java:239)
+	at com.securepay.service.FraudRuleBoundaryTest$HighAmountRule.doesNotFire_below10k(FraudRuleBoundaryTest.java:130)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+

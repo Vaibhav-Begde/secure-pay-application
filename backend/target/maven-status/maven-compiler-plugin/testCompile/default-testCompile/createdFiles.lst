@@ -1,0 +1,8 @@
+com\securepay\service\FraudDetectionServiceTest.class
+com\securepay\service\TransactionServiceTest.class
+com\securepay\service\AuthServiceTest.class
+com\securepay\service\OtpServiceTest.class
+com\securepay\controller\AuthControllerTest.class
+com\securepay\controller\SecurityAccessTest.class
+com\securepay\service\EmailServiceImplTest.class
+com\securepay\service\EndToEndScenarioTest.class

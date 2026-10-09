@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.securepay.controller.SecurityAccessTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.748 s -- in com.securepay.controller.SecurityAccessTest

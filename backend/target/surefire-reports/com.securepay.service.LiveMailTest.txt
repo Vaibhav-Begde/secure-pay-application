@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.securepay.service.LiveMailTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.60 s -- in com.securepay.service.LiveMailTest
