@@ -77,7 +77,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthResponse loginUser(LoginRequest loginRequest) {
+    public AuthResponse loginUser(LoginRequest loginRequest, String clientIp, String userAgent) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsernameOrEmail(),
@@ -89,6 +89,12 @@ public class AuthServiceImpl implements AuthService {
 
         User user = userRepository.findByUsernameOrEmail(loginRequest.getUsernameOrEmail(), loginRequest.getUsernameOrEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        user.setLastLoginAt(java.time.Instant.now());
+        user.setLastLoginDevice(describeDevice(userAgent));
+        user.setLastLoginIp(clientIp);
+        user.setLastLoginLocation(describeLocation(clientIp));
+        userRepository.save(user);
 
         String token = tokenProvider.generateToken(authentication, user.getId(), user.getRole().name());
 
@@ -132,7 +138,33 @@ public class AuthServiceImpl implements AuthService {
                 .role(user.getRole())
                 .enabled(user.isEnabled())
                 .transactionPinSet(user.getTransactionPinHash() != null)
+                .lastLoginAt(user.getLastLoginAt())
+                .lastLoginDevice(user.getLastLoginDevice())
+                .lastLoginIp(user.getLastLoginIp())
+                .lastLoginLocation(user.getLastLoginLocation())
                 .createdAt(user.getCreatedAt())
                 .build();
+    }
+
+    private String describeDevice(String userAgent) {
+        if (userAgent == null || userAgent.isBlank()) return "Unknown device";
+        String browser = userAgent.contains("Edg/") ? "Microsoft Edge"
+                : userAgent.contains("Chrome/") ? "Google Chrome"
+                : userAgent.contains("Firefox/") ? "Mozilla Firefox"
+                : userAgent.contains("Safari/") ? "Safari" : "Web browser";
+        String os = userAgent.contains("Windows") ? "Windows"
+                : userAgent.contains("Mac OS") ? "macOS"
+                : userAgent.contains("Android") ? "Android"
+                : userAgent.contains("iPhone") || userAgent.contains("iPad") ? "iOS"
+                : userAgent.contains("Linux") ? "Linux" : "Unknown OS";
+        return browser + " on " + os;
+    }
+
+    private String describeLocation(String clientIp) {
+        if (clientIp == null || clientIp.isBlank()) return "Unavailable";
+        if (clientIp.equals("127.0.0.1") || clientIp.equals("0:0:0:0:0:0:0:1") || clientIp.equals("::1")) {
+            return "Local development device";
+        }
+        return "Location unavailable";
     }
 }

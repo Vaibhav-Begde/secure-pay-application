@@ -12,6 +12,7 @@ import CustomerDashboard from '../pages/customer/CustomerDashboard';
 import WalletPage from '../pages/customer/WalletPage';
 import TransferPage from '../pages/customer/TransferPage';
 import TransactionsPage from '../pages/customer/TransactionsPage';
+import ProfilePage from '../pages/customer/ProfilePage';
 
 // Analyst Pages
 import AnalystDashboard from '../pages/analyst/AnalystDashboard';
@@ -62,6 +63,13 @@ export default function AppRoutes() {
           <Route path="/customer/wallet" element={<WalletPage />} />
           <Route path="/customer/transfer" element={<TransferPage />} />
           <Route path="/customer/transactions" element={<TransactionsPage />} />
+        </Route>
+      </Route>
+
+      {/* Profile is available to every authenticated role. */}
+      <Route element={<ProtectedRoute allowedRoles={['CUSTOMER', 'FRAUD_ANALYST', 'ADMIN']} />}>
+        <Route element={<DashboardLayout />}>
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Route>
 

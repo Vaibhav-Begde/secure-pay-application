@@ -4,7 +4,6 @@ D:\SecurePay\backend\src\main\java\com\securepay\config\package-info.java
 D:\SecurePay\backend\src\main\java\com\securepay\config\SecurityConfig.java
 D:\SecurePay\backend\src\main\java\com\securepay\controller\AdminFraudRuleController.java
 D:\SecurePay\backend\src\main\java\com\securepay\controller\AuthController.java
-D:\SecurePay\backend\src\main\java\com\securepay\controller\FaceVerificationController.java
 D:\SecurePay\backend\src\main\java\com\securepay\controller\FraudAnalystController.java
 D:\SecurePay\backend\src\main\java\com\securepay\controller\HealthController.java
 D:\SecurePay\backend\src\main\java\com\securepay\controller\OtpController.java
@@ -14,8 +13,6 @@ D:\SecurePay\backend\src\main\java\com\securepay\dto\ApiResponse.java
 D:\SecurePay\backend\src\main\java\com\securepay\dto\AuthResponse.java
 D:\SecurePay\backend\src\main\java\com\securepay\dto\DashboardStatsDto.java
 D:\SecurePay\backend\src\main\java\com\securepay\dto\ErrorResponse.java
-D:\SecurePay\backend\src\main\java\com\securepay\dto\FaceConfigurationRequest.java
-D:\SecurePay\backend\src\main\java\com\securepay\dto\FaceVerificationRequest.java
 D:\SecurePay\backend\src\main\java\com\securepay\dto\FraudAlertDto.java
 D:\SecurePay\backend\src\main\java\com\securepay\dto\FraudEvaluationResult.java
 D:\SecurePay\backend\src\main\java\com\securepay\dto\FraudRuleDto.java
@@ -62,8 +59,6 @@ D:\SecurePay\backend\src\main\java\com\securepay\service\AuthService.java
 D:\SecurePay\backend\src\main\java\com\securepay\service\AuthServiceImpl.java
 D:\SecurePay\backend\src\main\java\com\securepay\service\EmailService.java
 D:\SecurePay\backend\src\main\java\com\securepay\service\EmailServiceImpl.java
-D:\SecurePay\backend\src\main\java\com\securepay\service\FaceVerificationService.java
-D:\SecurePay\backend\src\main\java\com\securepay\service\FaceVerificationServiceImpl.java
 D:\SecurePay\backend\src\main\java\com\securepay\service\FraudDetectionService.java
 D:\SecurePay\backend\src\main\java\com\securepay\service\FraudDetectionServiceImpl.java
 D:\SecurePay\backend\src\main\java\com\securepay\service\OtpService.java

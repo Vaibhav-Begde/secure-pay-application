@@ -12,6 +12,7 @@ import {
   LogOut,
   X,
   Lock,
+  UserCircle,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import Badge from '../common/Badge';
@@ -20,6 +21,7 @@ export default function Sidebar({ isOpen, onClose }) {
   const { user, role, logout } = useAuth();
 
   const customerLinks = [
+    { name: 'Profile', path: '/profile', icon: UserCircle },
     { name: 'Dashboard', path: '/customer/dashboard', icon: LayoutDashboard },
     { name: 'Virtual Wallet', path: '/customer/wallet', icon: Wallet },
     { name: 'Send Money', path: '/customer/transfer', icon: Send },
@@ -27,11 +29,13 @@ export default function Sidebar({ isOpen, onClose }) {
   ];
 
   const analystLinks = [
+    { name: 'Profile', path: '/profile', icon: UserCircle },
     { name: 'Risk Analytics', path: '/analyst/dashboard', icon: LayoutDashboard },
     { name: 'Fraud Alerts', path: '/analyst/fraud-alerts', icon: AlertOctagon },
   ];
 
   const adminLinks = [
+    { name: 'Profile', path: '/profile', icon: UserCircle },
     { name: 'System Overview', path: '/admin/dashboard', icon: LayoutDashboard },
     { name: 'Fraud Rules Engine', path: '/admin/fraud-rules', icon: Sliders },
     { name: 'User Directory', path: '/admin/users', icon: Users },

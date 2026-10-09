@@ -33,8 +33,17 @@ public class User {
     @Column(nullable = false)
     private boolean enabled = true;
 
-    @Column(name = "reference_face", columnDefinition = "LONGTEXT")
-    private String referenceFace;
+    @Column(name = "last_login_at")
+    private Instant lastLoginAt;
+
+    @Column(name = "last_login_device", length = 255)
+    private String lastLoginDevice;
+
+    @Column(name = "last_login_ip", length = 64)
+    private String lastLoginIp;
+
+    @Column(name = "last_login_location", length = 120)
+    private String lastLoginLocation;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
@@ -45,7 +54,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String username, String email, String password, String transactionPinHash, Role role, boolean enabled, String referenceFace, Instant createdAt, Instant updatedAt) {
+    public User(Long id, String username, String email, String password, String transactionPinHash, Role role, boolean enabled, Instant lastLoginAt, String lastLoginDevice, String lastLoginIp, String lastLoginLocation, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -53,7 +62,10 @@ public class User {
         this.transactionPinHash = transactionPinHash;
         this.role = role;
         this.enabled = enabled;
-        this.referenceFace = referenceFace;
+        this.lastLoginAt = lastLoginAt;
+        this.lastLoginDevice = lastLoginDevice;
+        this.lastLoginIp = lastLoginIp;
+        this.lastLoginLocation = lastLoginLocation;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -91,8 +103,17 @@ public class User {
     public boolean isEnabled() { return enabled; }
     public void setEnabled(boolean enabled) { this.enabled = enabled; }
 
-    public String getReferenceFace() { return referenceFace; }
-    public void setReferenceFace(String referenceFace) { this.referenceFace = referenceFace; }
+    public Instant getLastLoginAt() { return lastLoginAt; }
+    public void setLastLoginAt(Instant lastLoginAt) { this.lastLoginAt = lastLoginAt; }
+
+    public String getLastLoginDevice() { return lastLoginDevice; }
+    public void setLastLoginDevice(String lastLoginDevice) { this.lastLoginDevice = lastLoginDevice; }
+
+    public String getLastLoginIp() { return lastLoginIp; }
+    public void setLastLoginIp(String lastLoginIp) { this.lastLoginIp = lastLoginIp; }
+
+    public String getLastLoginLocation() { return lastLoginLocation; }
+    public void setLastLoginLocation(String lastLoginLocation) { this.lastLoginLocation = lastLoginLocation; }
 
     public Instant getCreatedAt() { return createdAt; }
     public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
@@ -113,7 +134,10 @@ public class User {
         private String transactionPinHash;
         private Role role;
         private boolean enabled = true;
-        private String referenceFace;
+        private Instant lastLoginAt;
+        private String lastLoginDevice;
+        private String lastLoginIp;
+        private String lastLoginLocation;
         private Instant createdAt;
         private Instant updatedAt;
 
@@ -124,12 +148,15 @@ public class User {
         public UserBuilder transactionPinHash(String transactionPinHash) { this.transactionPinHash = transactionPinHash; return this; }
         public UserBuilder role(Role role) { this.role = role; return this; }
         public UserBuilder enabled(boolean enabled) { this.enabled = enabled; return this; }
-        public UserBuilder referenceFace(String referenceFace) { this.referenceFace = referenceFace; return this; }
+        public UserBuilder lastLoginAt(Instant lastLoginAt) { this.lastLoginAt = lastLoginAt; return this; }
+        public UserBuilder lastLoginDevice(String lastLoginDevice) { this.lastLoginDevice = lastLoginDevice; return this; }
+        public UserBuilder lastLoginIp(String lastLoginIp) { this.lastLoginIp = lastLoginIp; return this; }
+        public UserBuilder lastLoginLocation(String lastLoginLocation) { this.lastLoginLocation = lastLoginLocation; return this; }
         public UserBuilder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
         public UserBuilder updatedAt(Instant updatedAt) { this.updatedAt = updatedAt; return this; }
 
         public User build() {
-            return new User(id, username, email, password, transactionPinHash, role, enabled, referenceFace, createdAt, updatedAt);
+            return new User(id, username, email, password, transactionPinHash, role, enabled, lastLoginAt, lastLoginDevice, lastLoginIp, lastLoginLocation, createdAt, updatedAt);
         }
     }
 }

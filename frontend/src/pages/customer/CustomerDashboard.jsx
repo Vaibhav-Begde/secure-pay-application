@@ -23,8 +23,6 @@ import RiskScore from '../../components/common/RiskScore';
 import DataTable from '../../components/common/DataTable';
 import Modal from '../../components/common/Modal';
 import Loading from '../../components/common/Loading';
-import FaceConfigModal from '../../components/common/FaceConfigModal';
-import { Camera } from 'lucide-react';
 
 export default function CustomerDashboard() {
   const { user } = useAuth();
@@ -32,7 +30,6 @@ export default function CustomerDashboard() {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTxn, setSelectedTxn] = useState(null);
-  const [isFaceConfigOpen, setIsFaceConfigOpen] = useState(false);
 
   const fetchData = async () => {
     setLoading(true);
@@ -272,15 +269,6 @@ export default function CustomerDashboard() {
               <span className="text-slate-400">Step-Up Verification:</span>
               <span className="font-semibold text-slate-200">Enabled (SMS / OTP)</span>
             </div>
-            <div className="flex items-center justify-between py-1.5 border-b border-navy-750">
-              <span className="text-slate-400">Face Verification:</span>
-              <button 
-                onClick={() => setIsFaceConfigOpen(true)}
-                className="font-semibold text-primary-400 hover:text-primary-300 flex items-center gap-1 transition-colors"
-              >
-                <Camera className="w-3.5 h-3.5" /> Configure Face
-              </button>
-            </div>
             <div className="flex items-center justify-between py-1.5">
               <span className="text-slate-400">Fraud Engine Status:</span>
               <span className="font-semibold text-emerald-400 flex items-center gap-1">
@@ -412,11 +400,6 @@ export default function CustomerDashboard() {
         </Modal>
       )}
 
-      {/* Face Configuration Modal */}
-      <FaceConfigModal
-        isOpen={isFaceConfigOpen}
-        onClose={() => setIsFaceConfigOpen(false)}
-      />
     </div>
   );
 }

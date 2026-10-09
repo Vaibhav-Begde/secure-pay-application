@@ -119,7 +119,7 @@ class AuthServiceTest {
         when(tokenProvider.generateToken(any(), eq(1L), eq("CUSTOMER")))
                 .thenReturn("mocked.jwt.token");
 
-        AuthResponse response = authService.loginUser(loginRequest);
+        AuthResponse response = authService.loginUser(loginRequest, "127.0.0.1", "Mozilla/5.0 Chrome/1.0 Windows");
 
         assertNotNull(response);
         assertEquals("mocked.jwt.token", response.getToken());

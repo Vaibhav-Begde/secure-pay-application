@@ -238,17 +238,7 @@ public class TransactionServiceImpl implements TransactionService {
             return mapToTransactionDto(transaction);
         }
 
-        // Adaptive Handling for HIGH Risk vs MEDIUM Risk
-        if ("HIGH".equals(transaction.getRiskLevel()) || transaction.getStatus() == TransactionStatus.BLOCKED) {
-            // For HIGH Risk: OTP verification requires an additional Face Verification step
-            transaction.setDescription("OTP Verified - Awaiting Face Verification");
-            Transaction updatedTx = transactionRepository.save(transaction);
-
-            logger.info("High-risk Transaction {} OTP verified by user. Awaiting face verification step.", referenceCode);
-            return mapToTransactionDto(updatedTx);
-        }
-
-        // For MEDIUM Risk: OTP verification completes the money transfer
+        // OTP verification completes the transfer for all risk levels.
         User sender = transaction.getSender();
         User receiver = transaction.getReceiver();
         BigDecimal amount = transaction.getAmount();

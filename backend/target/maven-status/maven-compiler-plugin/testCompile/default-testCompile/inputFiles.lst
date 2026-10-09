@@ -4,7 +4,6 @@ D:\SecurePay\backend\src\test\java\com\securepay\controller\SecurityAccessTest.j
 D:\SecurePay\backend\src\test\java\com\securepay\service\AuthServiceTest.java
 D:\SecurePay\backend\src\test\java\com\securepay\service\EmailServiceImplTest.java
 D:\SecurePay\backend\src\test\java\com\securepay\service\EndToEndScenarioTest.java
-D:\SecurePay\backend\src\test\java\com\securepay\service\FaceVerificationServiceTest.java
 D:\SecurePay\backend\src\test\java\com\securepay\service\FraudDetectionServiceTest.java
 D:\SecurePay\backend\src\test\java\com\securepay\service\FraudRuleBoundaryTest.java
 D:\SecurePay\backend\src\test\java\com\securepay\service\MoneyIntegrityTest.java

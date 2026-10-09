@@ -14,11 +14,9 @@ import {
   EyeOff,
   AlertTriangle,
   RefreshCw,
-  ScanFace,
 } from 'lucide-react';
 import { transactionService } from '../../services/transactionService';
 import { authService } from '../../services/authService';
-import api from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import Button from '../../components/common/Button';
@@ -30,11 +28,6 @@ import Toast from '../../components/common/Toast';
 export default function TransferPage() {
   const { user, refreshCurrentUser } = useAuth();
   const { success: toastSuccess, error: toastError } = useToast();
-
-  const videoRef = React.useRef(null);
-  const canvasRef = React.useRef(null);
-  const [stream, setStream] = React.useState(null);
-  const [streamActive, setStreamActive] = React.useState(false);
 
   // Multi-step states: 1: Enter Details, 2: Review, 3: Fraud Risk Check, 4: OTP Challenge (if required), 5: Success
   const [step, setStep] = useState(1);
@@ -66,77 +59,6 @@ export default function TransferPage() {
   const [verifyingOtp, setVerifyingOtp] = useState(false);
   const [resendingOtp, setResendingOtp] = useState(false);
   const [stepError, setStepError] = useState('');
-
-  // Face Verification State
-  const [faceCaptured, setFaceCaptured] = useState(null);
-  const [verifyingFace, setVerifyingFace] = useState(false);
-
-  React.useEffect(() => {
-    if (step === 4.5) {
-      startCamera();
-    } else {
-      stopCamera();
-    }
-    return () => stopCamera();
-  }, [step]);
-
-  const stopCamera = React.useCallback(() => {
-    if (stream) {
-      stream.getTracks().forEach(track => track.stop());
-      setStream(null);
-      setStreamActive(false);
-    }
-  }, [stream]);
-
-  const startCamera = async () => {
-    setFaceCaptured(null);
-    try {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
-      setStream(mediaStream);
-      setStreamActive(true);
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-      }
-    } catch (err) {
-      setStepError('Camera permission denied or not available.');
-    }
-  };
-
-  const handleCaptureFace = () => {
-    if (videoRef.current && canvasRef.current) {
-      const context = canvasRef.current.getContext('2d');
-      canvasRef.current.width = videoRef.current.videoWidth;
-      canvasRef.current.height = videoRef.current.videoHeight;
-      context.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height);
-      const dataUrl = canvasRef.current.toDataURL('image/jpeg');
-      setFaceCaptured(dataUrl);
-      stopCamera();
-    }
-  };
-
-  const handleVerifyFace = async () => {
-    if (!faceCaptured) return;
-    setVerifyingFace(true);
-    setStepError('');
-    try {
-      const res = await api.post('/face-verification/verify', {
-        referenceCode: transferResult?.referenceCode || '',
-        faceImageBase64: faceCaptured,
-      });
-      const updatedTx = res?.data?.data;
-      if (updatedTx) {
-        setTransferResult(updatedTx);
-      }
-      toastSuccess('Face Verification successful!');
-      setStep(5);
-    } catch (err) {
-      const msg = err.response?.data?.message || err.message || 'Face verification failed.';
-      setStepError(msg);
-      toastError(msg);
-    } finally {
-      setVerifyingFace(false);
-    }
-  };
 
   const handleSetPin = async (e) => {
     e.preventDefault();
@@ -323,11 +245,7 @@ export default function TransferPage() {
       }
       toastSuccess('Step-Up OTP verified successfully!');
       
-      if (updatedTx?.description?.includes('Awaiting Face Verification')) {
-        setStep(4.5);
-      } else {
-        setStep(5);
-      }
+      setStep(5);
     } catch (err) {
       const msg = err.response?.data?.message || err.message || 'OTP verification failed.';
       setStepError(msg);
@@ -784,67 +702,6 @@ export default function TransferPage() {
             >
               Cancel Transfer
             </button>
-          </div>
-        </div>
-      )}
-
-      {/* STEP 4.5: Face Verification Challenge */}
-      {step === 4.5 && (
-        <div className="bg-navy-850 border border-navy-700/80 rounded-xl p-6 shadow-sm space-y-5 text-center">
-          <div className="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-400 flex items-center justify-center mx-auto mb-3">
-            <ScanFace className="w-6 h-6" />
-          </div>
-          <h3 className="text-lg font-bold text-white">Face Verification Required</h3>
-          <p className="text-xs text-slate-400 mt-1">
-            This transaction is flagged as HIGH risk. Please verify your face to proceed.
-          </p>
-
-          <div className="relative w-64 h-64 mx-auto bg-navy-900 border border-navy-700/80 rounded-xl overflow-hidden flex items-center justify-center">
-            {!faceCaptured ? (
-              <>
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  playsInline
-                  muted
-                  className="w-full h-full object-cover"
-                />
-                <canvas ref={canvasRef} className="hidden" />
-                {!streamActive && <span className="text-slate-400 text-sm">Starting camera...</span>}
-              </>
-            ) : (
-              <img src={faceCaptured} alt="Captured face" className="w-full h-full object-cover" />
-            )}
-          </div>
-
-          <div className="flex justify-center gap-3 pt-3">
-            {!faceCaptured ? (
-              <Button
-                variant="primary"
-                onClick={handleCaptureFace}
-                disabled={!streamActive}
-                icon={ScanFace}
-              >
-                Capture & Verify
-              </Button>
-            ) : (
-              <>
-                <Button
-                  variant="secondary"
-                  onClick={() => setFaceCaptured(null)}
-                  disabled={verifyingFace}
-                >
-                  Retake
-                </Button>
-                <Button
-                  variant="primary"
-                  onClick={handleVerifyFace}
-                  loading={verifyingFace}
-                >
-                  Verify Now
-                </Button>
-              </>
-            )}
           </div>
         </div>
       )}

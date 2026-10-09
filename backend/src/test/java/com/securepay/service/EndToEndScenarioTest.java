@@ -34,7 +34,7 @@ import static org.mockito.Mockito.*;
  *  4.  Multiple rapid transfers → increased risk factors verified
  *  5.  Unusual transaction time → increased risk factor verified
  *  6.  Multiple risk factors    → HIGH risk score
- *  7.  HIGH → OTP verified → awaiting face verification state
+ *  7.  HIGH → OTP verified → completes verification
  *  8.  Wrong OTP → rejected
  *  9.  Expired OTP → rejected
  * 10.  Insufficient balance → rejected
@@ -324,11 +324,11 @@ class EndToEndScenarioTest {
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-    // Scenario 7: HIGH risk → OTP → face verification awaiting state
+    // Scenario 7: HIGH risk → OTP verification completes the transaction flow
     // ─────────────────────────────────────────────────────────────────────────
     @Test
-    @DisplayName("Scenario 7: HIGH risk transaction → OTP verified → transitions to face verification state")
-    void scenario7_highRisk_otpVerified_awaitsFaceVerification() {
+    @DisplayName("Scenario 7: HIGH risk transaction → OTP verified → completes verification")
+    void scenario7_highRisk_otpVerified_completesVerification() {
         Transaction highRiskTx = Transaction.builder()
                 .id(10L)
                 .referenceCode("TRX-HIGH-001")
@@ -351,14 +351,14 @@ class EndToEndScenarioTest {
                 .used(false)
                 .build();
 
-        TransactionDto awaitingFaceDto = TransactionDto.builder()
+        TransactionDto verifiedDto = TransactionDto.builder()
                 .id(10L)
                 .referenceCode("TRX-HIGH-001")
                 .senderUsername("alice")
                 .receiverUsername("bob")
                 .status(TransactionStatus.BLOCKED)
                 .riskLevel("HIGH")
-                .description("OTP Verified - Awaiting Face Verification")
+                .description("Money Transfer (OTP Verified)")
                 .build();
 
         OtpVerifyRequest verifyRequest = OtpVerifyRequest.builder()
@@ -370,15 +370,13 @@ class EndToEndScenarioTest {
                 .findTopByTransactionReferenceCodeAndUsedFalseOrderByCreatedAtDesc("TRX-HIGH-001"))
                 .thenReturn(Optional.of(validOtp));
         lenient().when(passwordEncoder.matches("654321", "$2a$10$hashedOtpHere")).thenReturn(true);
-        when(transactionServiceForOtp.completeOtpVerification("TRX-HIGH-001")).thenReturn(awaitingFaceDto);
+        when(transactionServiceForOtp.completeOtpVerification("TRX-HIGH-001")).thenReturn(verifiedDto);
 
         TransactionDto result = otpServiceImpl.verifyOtp("alice", verifyRequest);
 
         assertNotNull(result);
-        // The transaction should now be waiting for face verification
-        assertTrue(result.getDescription().contains("Awaiting Face Verification") ||
-                        result.getDescription().contains("OTP Verified"),
-                "Description should indicate face verification is awaiting");
+        assertTrue(result.getDescription().contains("OTP Verified"),
+                "Description should indicate OTP verification completed");
         assertTrue(validOtp.isUsed(), "OTP should be marked as used after successful verification");
     }
 
