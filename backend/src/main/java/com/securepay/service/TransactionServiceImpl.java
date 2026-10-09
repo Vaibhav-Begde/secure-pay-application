@@ -125,6 +125,13 @@ public class TransactionServiceImpl implements TransactionService {
 
         // 2. Handle HIGH Risk (Blocked / Analyst Verification Required)
         if ("VERIFICATION_REQUIRED".equals(evaluation.getDecision()) && evaluation.getRiskScore() > 70) {
+            if (transferRequest.getAccountPassword() == null || transferRequest.getAccountPassword().isBlank()) {
+                throw new IllegalArgumentException("Your account password is required for HIGH-risk transfers.");
+            }
+            if (!passwordEncoder.matches(transferRequest.getAccountPassword(), sender.getPassword())) {
+                throw new IllegalArgumentException("Account password is incorrect.");
+            }
+
             Transaction blockedTx = Transaction.builder()
                     .sender(sender)
                     .receiver(receiver)

@@ -8,6 +8,8 @@ import {
   ShieldCheck,
   ShieldAlert,
   Download,
+  ArrowDownLeft,
+  ArrowUpRight,
 } from 'lucide-react';
 import { transactionService } from '../../services/transactionService';
 import { useAuth } from '../../context/AuthContext';
@@ -81,6 +83,12 @@ export default function TransactionsPage() {
     });
   }, [transactions, searchTerm, statusFilter, riskFilter]);
 
+  const isCurrentCustomer = (username) =>
+    (username || '').trim().toLowerCase() === (user?.username || '').trim().toLowerCase();
+
+  const displayParty = (username, fallback) =>
+    isCurrentCustomer(username) ? 'You' : (username || fallback);
+
   const columns = [
     {
       header: 'Reference Code',
@@ -92,22 +100,39 @@ export default function TransactionsPage() {
       ),
     },
     {
-      header: 'Sender',
+      header: 'Type',
       accessor: 'senderUsername',
-      cell: (row) => (
-        <span className="font-medium text-slate-200">
-          {row.senderUsername || user?.username || '—'}
-        </span>
-      ),
+      cell: (row) => {
+        const currentUsername = (user?.username || '').trim().toLowerCase();
+        const isDebit = (row.senderUsername || '').trim().toLowerCase() === currentUsername;
+        const Icon = isDebit ? ArrowUpRight : ArrowDownLeft;
+        return (
+          <div className={`inline-flex items-center gap-1.5 text-xs font-semibold ${isDebit ? 'text-rose-400' : 'text-emerald-400'}`}>
+            <span className={`flex h-6 w-6 items-center justify-center rounded-full ${isDebit ? 'bg-rose-500/15' : 'bg-emerald-500/15'}`}>
+              <Icon className="h-3.5 w-3.5" />
+            </span>
+            {isDebit ? 'Debit' : 'Credit'}
+          </div>
+        );
+      },
     },
     {
-      header: 'Receiver',
+      header: 'Counterparty',
       accessor: 'receiverUsername',
-      cell: (row) => (
-        <span className="font-medium text-slate-200">
-          {row.receiverUsername || 'External Account'}
-        </span>
-      ),
+      cell: (row) => {
+        const isDebit = isCurrentCustomer(row.senderUsername);
+        const counterparty = isDebit ? row.receiverUsername : row.senderUsername;
+        return (
+          <div>
+            <span className="block text-[10px] uppercase tracking-wider text-slate-500">
+              {isDebit ? 'To' : 'From'}
+            </span>
+            <span className="font-medium text-slate-200">
+              {displayParty(counterparty, 'External Account')}
+            </span>
+          </div>
+        );
+      },
     },
     {
       header: 'Amount',
@@ -273,6 +298,16 @@ export default function TransactionsPage() {
                 <span className="text-slate-400 block mb-0.5">Gross Transfer Amount:</span>
                 <span className="font-bold text-primary-400 text-sm">
                   ₹{Number(selectedTxn.amount || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })} INR
+                </span>
+              </div>
+              <div>
+                <span className="text-slate-400 block mb-0.5">Transaction Type:</span>
+                <span className={`font-semibold ${
+                  (selectedTxn.senderUsername || '').trim().toLowerCase() === (user?.username || '').trim().toLowerCase()
+                    ? 'text-rose-300'
+                    : 'text-emerald-300'
+                }`}>
+                  {(selectedTxn.senderUsername || '').trim().toLowerCase() === (user?.username || '').trim().toLowerCase() ? 'Debit ↑' : 'Credit ↓'}
                 </span>
               </div>
               <div>

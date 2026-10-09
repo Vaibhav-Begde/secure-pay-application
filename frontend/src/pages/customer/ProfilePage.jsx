@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Calendar, CheckCircle2, Eye, EyeOff, Globe2, KeyRound, Laptop, Mail, MapPin, Shield, User } from 'lucide-react';
+import { Calendar, CheckCircle2, Globe2, Laptop, Mail, MapPin, Shield, User } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import Badge from '../../components/common/Badge';
 import Loading from '../../components/common/Loading';
@@ -28,7 +28,6 @@ export default function ProfilePage() {
   const { user, refreshCurrentUser } = useAuth();
   const [profile, setProfile] = useState(user);
   const [loading, setLoading] = useState(true);
-  const [pinVisible, setPinVisible] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -81,22 +80,6 @@ export default function ProfilePage() {
           <Detail icon={Shield} label="Role" value={currentProfile.role} />
           <Detail icon={Calendar} label="Account created" value={formatDate(currentProfile.createdAt)} />
           <Detail icon={CheckCircle2} label="Account status" value={currentProfile.enabled === false ? 'Disabled' : 'Active'} />
-        </div>
-      </section>
-
-      <section className="rounded-xl border border-navy-700/80 bg-navy-850 p-5 sm:p-6">
-        <div className="mb-4 flex items-center gap-2"><KeyRound className="h-4 w-4 text-primary-400" /><h2 className="text-sm font-semibold uppercase tracking-wider text-slate-300">UPI / transaction PIN</h2></div>
-        <div className="flex flex-col gap-3 rounded-lg border border-navy-750 bg-navy-900 p-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-sm font-semibold text-white">{currentProfile.transactionPinSet ? 'PIN is configured' : 'PIN is not configured'}</p>
-            <p className="mt-1 text-xs text-slate-400">
-              {pinVisible ? 'Your PIN is protected and cannot be displayed or recovered.' : '••••••'}
-            </p>
-          </div>
-          <button type="button" onClick={() => setPinVisible((visible) => !visible)} className="inline-flex items-center gap-2 self-start rounded-md border border-navy-700 px-3 py-2 text-xs font-medium text-slate-300 hover:border-primary-500/50 hover:text-white sm:self-auto">
-            {pinVisible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-            {pinVisible ? 'Hide details' : 'View PIN status'}
-          </button>
         </div>
       </section>
 

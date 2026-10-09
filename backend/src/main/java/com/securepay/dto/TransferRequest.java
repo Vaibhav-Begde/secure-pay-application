@@ -18,6 +18,9 @@ public class TransferRequest {
     @Pattern(regexp = "\\d{6}", message = "Transaction PIN must contain exactly 6 digits")
     private String transactionPin;
 
+    // Required only when the evaluated transfer is HIGH risk.
+    private String accountPassword;
+
     private String description;
     private String deviceId;
     private String ipAddress;
@@ -51,6 +54,9 @@ public class TransferRequest {
     public String getTransactionPin() { return transactionPin; }
     public void setTransactionPin(String transactionPin) { this.transactionPin = transactionPin; }
 
+    public String getAccountPassword() { return accountPassword; }
+    public void setAccountPassword(String accountPassword) { this.accountPassword = accountPassword; }
+
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
@@ -71,6 +77,7 @@ public class TransferRequest {
         private String receiverUsernameOrEmail;
         private BigDecimal amount;
         private String transactionPin;
+        private String accountPassword;
         private String description;
         private String deviceId;
         private String ipAddress;
@@ -79,6 +86,7 @@ public class TransferRequest {
         public TransferRequestBuilder receiverUsernameOrEmail(String receiverUsernameOrEmail) { this.receiverUsernameOrEmail = receiverUsernameOrEmail; return this; }
         public TransferRequestBuilder amount(BigDecimal amount) { this.amount = amount; return this; }
         public TransferRequestBuilder transactionPin(String transactionPin) { this.transactionPin = transactionPin; return this; }
+        public TransferRequestBuilder accountPassword(String accountPassword) { this.accountPassword = accountPassword; return this; }
         public TransferRequestBuilder description(String description) { this.description = description; return this; }
         public TransferRequestBuilder deviceId(String deviceId) { this.deviceId = deviceId; return this; }
         public TransferRequestBuilder ipAddress(String ipAddress) { this.ipAddress = ipAddress; return this; }
@@ -87,6 +95,7 @@ public class TransferRequest {
         public TransferRequest build() {
             TransferRequest request = new TransferRequest(receiverUsernameOrEmail, amount, description, deviceId, ipAddress, location);
             request.setTransactionPin(transactionPin);
+            request.setAccountPassword(accountPassword);
             return request;
         }
     }

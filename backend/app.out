@@ -35,29 +35,29 @@
 
  :: Spring Boot ::                (v3.4.2)
 
-2026-10-09T21:29:12.992+05:30  INFO 26972 --- [securepay-backend] [           main] com.securepay.SecurePayApplication       : Starting SecurePayApplication using Java 25.0.2 with PID 26972 (D:\SecurePay\backend\target\classes started by vaibh in D:\SecurePay\backend)
-2026-10-09T21:29:12.994+05:30  INFO 26972 --- [securepay-backend] [           main] com.securepay.SecurePayApplication       : No active profile set, falling back to 1 default profile: "default"
-2026-10-09T21:29:13.488+05:30  INFO 26972 --- [securepay-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-10-09T21:29:13.542+05:30  INFO 26972 --- [securepay-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48 ms. Found 7 JPA repository interfaces.
+2026-10-09T21:55:41.141+05:30  INFO 24580 --- [securepay-backend] [           main] com.securepay.SecurePayApplication       : Starting SecurePayApplication using Java 25.0.2 with PID 24580 (D:\SecurePay\backend\target\classes started by vaibh in D:\SecurePay\backend)
+2026-10-09T21:55:41.142+05:30  INFO 24580 --- [securepay-backend] [           main] com.securepay.SecurePayApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-10-09T21:55:41.596+05:30  INFO 24580 --- [securepay-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-09T21:55:41.647+05:30  INFO 24580 --- [securepay-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 46 ms. Found 7 JPA repository interfaces.
 WARNING: A restricted method in java.lang.System has been called
 WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/C:/Users/CodexSandboxOffline/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.34/tomcat-embed-core-10.1.34.jar)
 WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
 WARNING: Restricted methods will be blocked in a future release unless native access is enabled
 
-2026-10-09T21:29:21.914+05:30  INFO 26972 --- [securepay-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2026-10-09T21:29:21.929+05:30  INFO 26972 --- [securepay-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-10-09T21:29:21.930+05:30  INFO 26972 --- [securepay-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
-2026-10-09T21:29:21.961+05:30  INFO 26972 --- [securepay-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-10-09T21:29:21.962+05:30  INFO 26972 --- [securepay-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 8937 ms
-2026-10-09T21:29:22.046+05:30  INFO 26972 --- [securepay-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-10-09T21:29:22.080+05:30  INFO 26972 --- [securepay-backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
-2026-10-09T21:29:22.097+05:30  INFO 26972 --- [securepay-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-10-09T21:29:22.253+05:30  INFO 26972 --- [securepay-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-10-09T21:29:22.274+05:30  INFO 26972 --- [securepay-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-10-09T21:29:22.369+05:30  INFO 26972 --- [securepay-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3f322610
-2026-10-09T21:29:22.370+05:30  INFO 26972 --- [securepay-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-10-09T21:29:22.397+05:30  WARN 26972 --- [securepay-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-10-09T21:29:22.407+05:30  INFO 26972 --- [securepay-backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-10-09T21:55:50.017+05:30  INFO 24580 --- [securepay-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-10-09T21:55:50.037+05:30  INFO 24580 --- [securepay-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-09T21:55:50.037+05:30  INFO 24580 --- [securepay-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2026-10-09T21:55:50.075+05:30  INFO 24580 --- [securepay-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-10-09T21:55:50.076+05:30  INFO 24580 --- [securepay-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 8901 ms
+2026-10-09T21:55:50.173+05:30  INFO 24580 --- [securepay-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-09T21:55:50.205+05:30  INFO 24580 --- [securepay-backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2026-10-09T21:55:50.223+05:30  INFO 24580 --- [securepay-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-10-09T21:55:50.374+05:30  INFO 24580 --- [securepay-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-09T21:55:50.394+05:30  INFO 24580 --- [securepay-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-09T21:55:50.489+05:30  INFO 24580 --- [securepay-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@20c3b34b
+2026-10-09T21:55:50.494+05:30  INFO 24580 --- [securepay-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-09T21:55:50.520+05:30  WARN 24580 --- [securepay-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-10-09T21:55:50.530+05:30  INFO 24580 --- [securepay-backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0.43
@@ -65,15 +65,24 @@ WARNING: Restricted methods will be blocked in a future release unless native ac
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-10-09T21:29:22.964+05:30  INFO 26972 --- [securepay-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-10-09T21:29:23.072+05:30  INFO 26972 --- [securepay-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-10-09T21:29:23.322+05:30  INFO 26972 --- [securepay-backend] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-10-09T21:29:23.795+05:30  INFO 26972 --- [securepay-backend] [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-2026-10-09T21:29:23.800+05:30  WARN 26972 --- [securepay-backend] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
-2026-10-09T21:29:23.883+05:30  WARN 26972 --- [securepay-backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-10-09T21:29:24.249+05:30  INFO 26972 --- [securepay-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2026-10-09T21:29:24.259+05:30  INFO 26972 --- [securepay-backend] [           main] com.securepay.SecurePayApplication       : Started SecurePayApplication in 11.555 seconds (process running for 11.797)
-2026-10-09T21:29:24.336+05:30  INFO 26972 --- [securepay-backend] [           main] com.securepay.config.DataInitializer     : Database users already seeded. Skipping user seed.
-2026-10-09T21:29:25.914+05:30  INFO 26972 --- [securepay-backend] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-10-09T21:29:25.915+05:30  INFO 26972 --- [securepay-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-10-09T21:29:25.915+05:30  INFO 26972 --- [securepay-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2026-10-09T21:55:51.100+05:30  INFO 24580 --- [securepay-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-09T21:55:51.195+05:30  INFO 24580 --- [securepay-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-09T21:55:51.436+05:30  INFO 24580 --- [securepay-backend] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-09T21:55:51.900+05:30  INFO 24580 --- [securepay-backend] [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2026-10-09T21:55:51.905+05:30  WARN 24580 --- [securepay-backend] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2026-10-09T21:55:51.968+05:30  WARN 24580 --- [securepay-backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-09T21:55:52.328+05:30  INFO 24580 --- [securepay-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-10-09T21:55:52.333+05:30  INFO 24580 --- [securepay-backend] [           main] com.securepay.SecurePayApplication       : Started SecurePayApplication in 11.456 seconds (process running for 11.661)
+2026-10-09T21:55:52.417+05:30  INFO 24580 --- [securepay-backend] [           main] com.securepay.config.DataInitializer     : Database users already seeded. Skipping user seed.
+2026-10-09T21:55:54.259+05:30  INFO 24580 --- [securepay-backend] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-09T21:55:54.264+05:30  INFO 24580 --- [securepay-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-09T21:55:54.265+05:30  INFO 24580 --- [securepay-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-10-09T21:57:19.726+05:30  INFO 24580 --- [securepay-backend] [nio-8080-exec-7] c.s.service.FraudDetectionServiceImpl    : Evaluated transaction for Vaibhav Begde: Score=70, Level=MEDIUM, Decision=OTP_REQUIRED, Reasons=[Transfer amount exceeds ₹10,000.00 tier threshold, Previous fraud history]
+2026-10-09T21:57:44.562+05:30  INFO 24580 --- [securepay-backend] [io-8080-exec-10] c.s.service.FraudDetectionServiceImpl    : Evaluated transaction for Vaibhav Begde: Score=70, Level=MEDIUM, Decision=OTP_REQUIRED, Reasons=[Transfer amount exceeds ₹10,000.00 tier threshold, Previous fraud history]
+2026-10-09T21:58:49.218+05:30  INFO 24580 --- [securepay-backend] [nio-8080-exec-8] c.s.service.FraudDetectionServiceImpl    : Evaluated transaction for imcc: Score=100, Level=HIGH, Decision=VERIFICATION_REQUIRED, Reasons=[High transfer amount exceeds ₹50,000.00 safety threshold, Unusually high transaction amount (400.0x higher than average), New receiver, Unusual transaction time, Previous fraud history]
+2026-10-09T22:00:58.107+05:30  INFO 24580 --- [securepay-backend] [nio-8080-exec-6] c.s.service.FraudDetectionServiceImpl    : Evaluated transaction for imcc: Score=100, Level=HIGH, Decision=VERIFICATION_REQUIRED, Reasons=[High transfer amount exceeds ₹50,000.00 safety threshold, Unusually high transaction amount (400.0x higher than average), New receiver, Unusual transaction time, Previous fraud history]
+2026-10-09T22:00:58.109+05:30  INFO 24580 --- [securepay-backend] [nio-8080-exec-6] c.s.service.TransactionServiceImpl       : Fraud Evaluation Result for transfer ₹100000 from imcc to Aditya Begde: RiskScore=100, RiskLevel=HIGH, Decision=VERIFICATION_REQUIRED
+2026-10-09T22:01:16.855+05:30  INFO 24580 --- [securepay-backend] [nio-8080-exec-6] com.securepay.service.EmailServiceImpl   : Sent transaction verification email for TRX-7389C8DE to vaibhav.begde.mca25@mespune.in
+2026-10-09T22:01:16.860+05:30  INFO 24580 --- [securepay-backend] [nio-8080-exec-6] com.securepay.service.OtpServiceImpl     : Generated OTP for Transaction TRX-7389C8DE and dispatched it to the sender's registered email.
+2026-10-09T22:01:32.797+05:30  INFO 24580 --- [securepay-backend] [nio-8080-exec-9] com.securepay.service.OtpServiceImpl     : Successfully verified OTP for Transaction TRX-7389C8DE
+2026-10-09T22:01:32.859+05:30  INFO 24580 --- [securepay-backend] [nio-8080-exec-9] c.s.service.TransactionServiceImpl       : Medium-risk Transaction TRX-7389C8DE OTP verified and COMPLETED successfully. Transferred ₹100000.00 from imcc to Aditya Begde

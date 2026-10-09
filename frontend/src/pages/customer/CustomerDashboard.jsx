@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Wallet,
+  ArrowDownLeft,
   ArrowUpRight,
   ShieldCheck,
   ShieldAlert,
@@ -91,6 +92,9 @@ export default function CustomerDashboard() {
 
   const recentTransactions = transactions.slice(0, 5);
 
+  const isCurrentCustomer = (username) =>
+    (username || '').trim().toLowerCase() === (user?.username || '').trim().toLowerCase();
+
   const columns = [
     {
       header: 'Reference',
@@ -102,22 +106,37 @@ export default function CustomerDashboard() {
       ),
     },
     {
-      header: 'Sender',
+      header: 'Type',
       accessor: 'senderUsername',
-      cell: (row) => (
-        <span className="font-medium text-slate-200">
-          {row.senderUsername || user?.username || '—'}
-        </span>
-      ),
+      cell: (row) => {
+        const isDebit = isCurrentCustomer(row.senderUsername);
+        const Icon = isDebit ? ArrowUpRight : ArrowDownLeft;
+        return (
+          <div className={`inline-flex items-center gap-1.5 text-xs font-semibold ${isDebit ? 'text-rose-400' : 'text-emerald-400'}`}>
+            <span className={`flex h-6 w-6 items-center justify-center rounded-full ${isDebit ? 'bg-rose-500/15' : 'bg-emerald-500/15'}`}>
+              <Icon className="h-3.5 w-3.5" />
+            </span>
+            {isDebit ? 'Debit' : 'Credit'}
+          </div>
+        );
+      },
     },
     {
-      header: 'Receiver',
+      header: 'Counterparty',
       accessor: 'receiverUsername',
-      cell: (row) => (
-        <span className="font-medium text-slate-200">
-          {row.receiverUsername || 'External Account'}
-        </span>
-      ),
+      cell: (row) => {
+        const isDebit = isCurrentCustomer(row.senderUsername);
+        return (
+          <div>
+            <span className="block text-[10px] uppercase tracking-wider text-slate-500">
+              {isDebit ? 'To' : 'From'}
+            </span>
+            <span className="font-medium text-slate-200">
+              {isDebit ? (row.receiverUsername || 'External Account') : (row.senderUsername || 'External Account')}
+            </span>
+          </div>
+        );
+      },
     },
     {
       header: 'Amount',
@@ -153,11 +172,11 @@ export default function CustomerDashboard() {
       ),
     },
     {
-      header: 'Date',
+      header: 'Date & Time',
       accessor: 'createdAt',
       cell: (row) => (
         <span className="text-xs text-slate-400">
-          {row.createdAt ? new Date(row.createdAt).toLocaleDateString() : 'Just now'}
+          {row.createdAt ? new Date(row.createdAt).toLocaleString() : 'Just now'}
         </span>
       ),
     },

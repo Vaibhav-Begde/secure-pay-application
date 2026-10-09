@@ -37,6 +37,7 @@ export default function TransferPage() {
   const [amount, setAmount] = useState('');
   const [note, setNote] = useState('');
   const [transactionPin, setTransactionPin] = useState('');
+  const [accountPassword, setAccountPassword] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPin, setNewPin] = useState('');
   const [confirmPin, setConfirmPin] = useState('');
@@ -44,6 +45,7 @@ export default function TransferPage() {
   const [showNewPin, setShowNewPin] = useState(false);
   const [showConfirmPin, setShowConfirmPin] = useState(false);
   const [showTransferPin, setShowTransferPin] = useState(false);
+  const [showHighRiskPassword, setShowHighRiskPassword] = useState(false);
   const [savingPin, setSavingPin] = useState(false);
 
   // Risk evaluation state
@@ -171,6 +173,10 @@ export default function TransferPage() {
       setStepError('Enter your 6-digit transaction PIN to continue.');
       return;
     }
+    if (riskAssessment?.level === 'HIGH' && !accountPassword) {
+      setStepError('Enter your account login password for this HIGH-risk transfer.');
+      return;
+    }
     setSubmitting(true);
     setStepError('');
 
@@ -179,6 +185,7 @@ export default function TransferPage() {
         receiverUsernameOrEmail: receiver.trim(),
         amount: parseFloat(amount),
         transactionPin,
+        ...(riskAssessment?.level === 'HIGH' ? { accountPassword } : {}),
         description: note.trim() || 'Direct Transfer via SecurePay',
         deviceId: 'Web-Browser-Chrome',
         ipAddress: '127.0.0.1',
@@ -193,6 +200,8 @@ export default function TransferPage() {
 
       setTransferResult(data);
       setTransactionPin('');
+      setAccountPassword('');
+      setShowHighRiskPassword(false);
       setShowTransferPin(false);
 
       // Backend returns VERIFICATION_REQUIRED or OTP_REQUIRED for MEDIUM risk,
@@ -220,6 +229,7 @@ export default function TransferPage() {
     } finally {
       setSubmitting(false);
       setTransactionPin('');
+      setAccountPassword('');
     }
   };
 
@@ -579,9 +589,32 @@ export default function TransferPage() {
                   <div className="p-3 rounded-md bg-amber-950/50 border border-amber-800/60 text-amber-300 text-xs flex items-center gap-2.5">
                     <AlertTriangle className="w-5 h-5 shrink-0 text-amber-400" />
                     <span>
-                      High risk threshold reached. You will be asked for step-up OTP authentication next.
+                      High risk threshold reached. Account password and step-up OTP authentication are required.
                     </span>
                   </div>
+                )}
+
+                {riskAssessment.level === 'HIGH' && (
+                  <Input
+                    id="account-password-high-risk"
+                    label="Account Login Password"
+                    type={showHighRiskPassword ? 'text' : 'password'}
+                    placeholder="Enter your account password"
+                    icon={KeyRound}
+                    value={accountPassword}
+                    onChange={(e) => setAccountPassword(e.target.value)}
+                    endAdornment={
+                      <button
+                        type="button"
+                        onClick={() => setShowHighRiskPassword((visible) => !visible)}
+                        aria-label={showHighRiskPassword ? 'Hide account password' : 'Show account password'}
+                        className="text-slate-400 hover:text-slate-200 p-1"
+                      >
+                        {showHighRiskPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    }
+                    required
+                  />
                 )}
 
                 <Input
@@ -613,6 +646,8 @@ export default function TransferPage() {
                     icon={ArrowLeft}
                     onClick={() => {
                       setTransactionPin('');
+                      setAccountPassword('');
+                      setShowHighRiskPassword(false);
                       setStep(2);
                     }}
                   >
@@ -785,6 +820,8 @@ export default function TransferPage() {
                 setAmount('');
                 setNote('');
                 setTransactionPin('');
+                setAccountPassword('');
+                setShowHighRiskPassword(false);
                 setTransferResult(null);
                 setRiskAssessment(null);
                 setOtpCode('');
