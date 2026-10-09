@@ -69,7 +69,10 @@ public class SecurityConfig {
         configuration.setAllowedOriginPatterns(List.of(
                 "http://localhost:*",
                 "http://127.0.0.1:*",
-                "http://[::1]:*"
+                "http://[::1]:*",
+                // Allows Vercel preview/production domains for college testing.
+                // Restrict this to the exact deployed domain before production use.
+                "https://*.vercel.app"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
